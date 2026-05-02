@@ -4,6 +4,10 @@ if(process.env.NODE_ENV !="production") { //prevent evn file from uploading duri
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors({
+  origin: "https://dashboard-ten-indol-90.vercel.app"
+}));
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
