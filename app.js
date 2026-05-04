@@ -97,7 +97,16 @@ const Listing = require("./models/listing.js");
 app.get("/api/listings", async (req, res) => {
   try {
     const listings = await Listing.find({});
-    res.json(listings);
+    const mapped = listings.map(l => ({
+      id: l._id.toString(),
+      title: l.title,
+      price: l.price,
+      city: l.location,        
+      country: l.country,
+      img: l.image?.url || "", 
+      desc: l.description,     
+    }));
+    res.json(mapped);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch listings" });
   }
